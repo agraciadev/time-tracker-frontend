@@ -5,7 +5,6 @@ services:
       context: ./docker/node
     volumes:
       - ./:/usr/app
-    # entrypoint: ./docker/node/entrypoint.sh
     stdin_open: true 
     tty: true
     ports:

@@ -6,11 +6,11 @@
 
 2. Build images `docker compose build --no-cache`
 
-3. Run container `docker compose up -d --wait`
+3. Run container `docker compose up -d`
 
-4. Install modules `npm install`
+4. Install modules `npm install` or in the host `docker exec -it time-tracker-frontend-node-1 sh -c "npm install"`
 
-5. Start dev server `npm run dev`
+5. Start dev server `npm run dev` or in the host `docker exec -it time-tracker-frontend-node-1 sh -c "npm run dev"`
 
 6. Url access by default from `http://localhost:3000` 
 
@@ -20,4 +20,4 @@
 
 SERVER_PORT=3000
 
-API=https://localhost/api
+API=http://localhost/api
