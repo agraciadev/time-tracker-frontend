@@ -12,7 +12,7 @@
 
 5. Start dev server `npm run dev` or in the host `docker exec -it time-tracker-frontend-node-1 sh -c "npm run dev"`
 
-6. Url access by default from `http://localhost:3000` 
+6. Default Url to access is `http://localhost:3000` 
 
 
 
