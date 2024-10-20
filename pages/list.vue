@@ -3,6 +3,8 @@ import { taskService } from '@/services/task'
 import { useTaskListStore } from '@/stores/taskList'
 import { DateTime } from "luxon";
 import dateTimeDiff from "@/utils/dateTimeDiff"
+import Task from "@/models/task/task"
+import type Time from '~/models/time/time';
 
 const layout = 'default'
 
@@ -41,7 +43,7 @@ const formattedTime = computed(() => {
             }
         });
 
-        const dates = []
+        const dates: Time[] = []
 
         tasksToday.forEach(task => {
             task.times.forEach(time => {
@@ -103,9 +105,6 @@ const formattedTime = computed(() => {
                 <tr v-for="task in taskList.tasks" :key="task.name">
                     <td>{{ task.name }}</td>
                     <td class="time">
-                        <span v-if="task.totalTime().years">{{ task.totalTime().years }} Years</span>
-                        <span v-if="task.totalTime().months">{{ task.totalTime().months }} Months</span>
-                        <span v-if="task.totalTime().days">{{ task.totalTime().days }} Days</span>
                         <span v-if="task.totalTime().hours">{{ task.totalTime().hours }} Hours</span>
                         <span v-if="task.totalTime().minutes">{{ task.totalTime().minutes }} Minutes</span>
                         <span v-if="task.totalTime().seconds">{{ task.totalTime().seconds }} Seconds</span>

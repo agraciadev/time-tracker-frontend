@@ -7,7 +7,7 @@ export default class Task {
     times: Array<Time>
     inProgress: boolean
 
-    private _totalTime: { days: number, hours: number, minutes: number, seconds: number } | null = null
+    private _totalTime: { hours: number, minutes: number, seconds: number } | null = null
 
     constructor(
         name: string,
@@ -32,7 +32,7 @@ export default class Task {
         )
     }
 
-    public totalTime(): { days: number, hours: number, minutes: number, seconds: number } {
+    public totalTime(): { hours: number, minutes: number, seconds: number } {
         if (this._totalTime == null) {
             this._totalTime = dateTimeDiff(this.times)
         }

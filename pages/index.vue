@@ -22,7 +22,6 @@ const init = ref(false)
 
 const timer = useTimerStore()
 const task = useTaskStore()
-const errors = useErrorsStore()
 const taskList = useTaskListStore()
 
 onMounted(async () => {
@@ -34,10 +33,13 @@ onMounted(async () => {
             task.inProgress = true
 
             const time = taskInProgress.times.find(time => time.endTime == undefined)
-            const diff = DateTime.now().diff(time.startTime, ['hours', 'minutes', 'seconds']);
-            timer.hours = diff.hours
-            timer.minutes = diff.minutes
-            timer.seconds = Math.trunc(diff.seconds)
+            if (time) {
+                const diff = DateTime.now().diff(time.startTime, ['hours', 'minutes', 'seconds']);
+                timer.hours = diff.hours
+                timer.minutes = diff.minutes
+                timer.seconds = Math.trunc(diff.seconds)
+            }
+
             timer.startTimer()
         }
     }
@@ -61,10 +63,14 @@ async function toggleTimer() {
     loading.value = true
 
     if (task.inProgress) {
-        await taskService.end({ name: task.task })
+        if (task.task) {
+            await taskService.end({ name: task.task })
+        }
         timer.stopTimer()
     } else {
-        await taskService.start({ name: task.task })
+        if (task.task) {
+            await taskService.start({ name: task.task })
+        }
         timer.startTimer()
     }
 
@@ -97,7 +103,7 @@ async function toggleTimer() {
             </v-col>
         </v-row>
     </v-container>
-    
+
     <v-container v-if="init">
         <v-row align="center" justify="center">
             <v-col cols="12">
